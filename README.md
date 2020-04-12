@@ -94,9 +94,9 @@ spark-submit --master yarn-cluster --conf xxxx  --driver-memory XXX --num-execut
 
 #### Load meta & Query
 
-- load meta: 注册视图、表、分区等信息到walrus，具体可参考[examples](https://git.code.oa.com/pcg_news_commercial_shark_platform/walrus/tree/master/examples/src/main/java/org/pcg/walrus/examples/MetaClient.java)。
+- load meta: 注册视图、表、分区等信息到walrus，具体可参考[examples](https://github.com/WalrusOlap/walrus/tree/master/examples/src/main/java/org/pcg/walrus/examples/MetaClient.java)。
 
-- query: 异步查询，具体可参考[examples](https://git.code.oa.com/pcg_news_commercial_shark_platform/walrus/blob/master/examples/src/main/java/org/pcg/walrus/examples/TaskClient.java)。
+- query: 异步查询，具体可参考[examples](https://github.com/WalrusOlap/walrus/blob/master/examples/src/main/java/org/pcg/walrus/examples/TaskClient.java)。
 
 ### Design
 
@@ -105,17 +105,17 @@ spark-submit --master yarn-cluster --conf xxxx  --driver-memory XXX --num-execut
 
 ![Walrus Query plan](https://raw.githubusercontent.com/WalrusOlap/walrus/master/docs/images/core.png)
 
-- 解析器(parser): 根据meta把query解析成查询计划。你也可以定制自己的[parser](https://git.code.oa.com/pcg_news_commercial_shark_platform/walrus/tree/master/core/src/main/java/org/pcg/walrus/core/parse)。
+- 解析器(parser): 根据meta把query解析成查询计划。你也可以定制自己的[parser](https://github.com/WalrusOlap/walrus/tree/master/core/src/main/java/org/pcg/walrus/core/parse)。
 
 - 查询计划(Logic Plan): 一棵join+union的嵌套树：
 ![Walrus Query plan](https://raw.githubusercontent.com/WalrusOlap/walrus/master/docs/images/query.png)
 
-- 优化器(optimizer): 对查询计划树进行重写，默认的有分区合并优化器、数据join倾斜优化器。您可以根据自身的业务数据特点添加自己的[optimizer](https://git.code.oa.com/pcg_news_commercial_shark_platform/walrus/tree/master/core/src/main/java/org/pcg/walrus/core/plan/optimize)。
+- 优化器(optimizer): 对查询计划树进行重写，默认的有分区合并优化器、数据join倾斜优化器。您可以根据自身的业务数据特点添加自己的[optimizer](https://github.com/WalrusOlap/walrus/tree/master/core/src/main/java/org/pcg/walrus/core/plan/optimize)。
 
-- Cube选择(chooser): 根据自定义优先级、cube cost等规则选择查询最优数据cube。您可以根据自身的业务数据特点定制自己的[chooser](https://git.code.oa.com/pcg_news_commercial_shark_platform/walrus/tree/master/core/src/main/java/org/pcg/walrus/core/parse/choose)。
+- Cube选择(chooser): 根据自定义优先级、cube cost等规则选择查询最优数据cube。您可以根据自身的业务数据特点定制自己的[chooser](https://github.com/WalrusOlap/walrus/tree/master/core/src/main/java/org/pcg/walrus/core/parse/choose)。
 
 #### Metadata
-简单来说，**Walrus** metadata是对雪花模型的抽象。具体定义可参考[pb](https://git.code.oa.com/pcg_news_commercial_shark_platform/walrus/tree/master/meta/pb)文件。
+简单来说，**Walrus** metadata是对雪花模型的抽象。具体定义可参考[pb](https://github.com/WalrusOlap/walrus/tree/master/meta/pb)文件。
 
 - 视图(view): 一棵join+union的嵌套树，可以做到对事实表和维度表的多层次自由组合。
 
@@ -127,7 +127,7 @@ spark-submit --master yarn-cluster --conf xxxx  --driver-memory XXX --num-execut
     - 维度指标等信息各个分区单独存储，能减少历史重跑、业务变更等运维压力。
     - 每个分区数据分版本(tablet)保存，读写分离。
 
-- 维度(dimension)、指标(metric): 除了常规的名称、类型等信息外，维度、指标还可以指定计算逻辑(derivedMode:select[直接select], derived[派生], virtual[虚拟字段],join[关联])。指标目前支持的聚合函数有SUM,MIN,MAX,COUNT,COUNT_DISTINCT,COUNT,COLLECT_LIST,MATH_EXPRESSION等，你也可以在[aggregation](https://git.code.oa.com/pcg_news_commercial_shark_platform/walrus/tree/master/core/src/main/java/org/pcg/walrus/core/parse/aggregations/metrics)包下实现你自己的聚合函数。
+- 维度(dimension)、指标(metric): 除了常规的名称、类型等信息外，维度、指标还可以指定计算逻辑(derivedMode:select[直接select], derived[派生], virtual[虚拟字段],join[关联])。指标目前支持的聚合函数有SUM,MIN,MAX,COUNT,COUNT_DISTINCT,COUNT,COLLECT_LIST,MATH_EXPRESSION等，你也可以在[aggregation](https://github.com/WalrusOlap/walrus/tree/master/core/src/main/java/org/pcg/walrus/core/parse/aggregations/metrics)包下实现你自己的聚合函数。
 
 ### Configuration
 
