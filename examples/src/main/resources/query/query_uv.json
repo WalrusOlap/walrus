@@ -1,0 +1,13 @@
+{
+  "author": "walrus",
+  "saveMode": "hdfs",
+  "savePath": "$path",
+  "logic": {
+    "table": "web",
+    "metric": "uv,imp",
+    "where": "location_id='loc_1'",
+    "group_by": "location_id",
+    "end_day": "20191101",
+    "begin_day": "20191101"
+  }
+}

@@ -1,0 +1,35 @@
+package org.pcg.walrus.meta.pb;
+
+import "WFieldMessage.proto";
+
+// 视图忽略检查
+message WIgnoreMsg
+{
+    optional string type = 1;// 忽略类型, exclusive：排他性忽略，如果指定忽略条件，忽略同级下其他view | eq：当前sql满足相等条件,忽略当前view | neq：当前sql满足不相等条件,忽略当前view  | violence：暴力检查，一旦出现此column，忽略当前view
+    optional string column = 2;// 忽略标示字段
+    optional string value = 3;// 忽略标示字段值
+}
+
+// 数据cube：中间表
+message WCube
+{
+    optional string name = 1; // cube name: table name
+    optional int32  priority = 2[default = 1];// cube with high level is easier to be chosen
+    repeated WCube cubes = 3;// cube children
+}
+
+// 视图: 嵌套的 union + join
+message WView 
+{
+    optional string name = 1; //视图名称
+    optional string group = 2; //视图分组
+    optional string business = 3[default = "unknown"]; //视图业务
+    optional string desc = 4; //视图描述
+    optional int32 isValid = 5[default = 1]; // 有效性. 0:无效, 1:有效
+    repeated string filters = 6; // 数据过滤
+    optional string unionMode = 7[default = "simple"]; //视图union方式：simple(简单合并), supplement(指标补充合并), timeline(时间轴合并)...
+    repeated WIgnoreMsg ignoreMsg = 8; // 忽略信息，比如此视图只包含col_1=val_1的数据，当condition满足col_1!=val_1 or col_1=val_2时忽略当前view
+    repeated WDict joins = 9;// Join表集合
+    repeated WView unions = 10;// view集合
+    repeated WCube cubes = 11;// 中间表集合
+}

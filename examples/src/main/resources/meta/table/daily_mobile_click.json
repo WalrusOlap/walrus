@@ -1,0 +1,9 @@
+{
+  "tableName":"daily_mobile_click",
+  "group":"mobile",
+  "desc":"mobile click daily model",
+  "startTime":"2018-01-01 00:00:00",
+  "endTime":"2019-11-01 23:59:59",
+  "partitionMode":"D",
+  "levels":"offline"
+}

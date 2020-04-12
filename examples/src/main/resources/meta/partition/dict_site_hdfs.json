@@ -1,0 +1,25 @@
+{
+  "tableType":"dict",
+  "tableName":"dict_site",
+  "partitionKey":"A",
+  "startTime":"2019-01-01 00:00:00",
+  "endTime":"2020-12-31 00:59:59",
+  "dimensions": [
+    {
+      "name":"site",
+      "type":"string",
+      "group":"站点",
+      "chinese":"频道"
+    },
+    {
+      "name":"product",
+      "type":"string",
+      "group":"站点",
+      "chinese":"站点"
+    }
+  ],
+  "metrics": [],
+  "path": "$path",
+  "format":"csv",
+  "isBc": "1"
+}

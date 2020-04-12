@@ -1,0 +1,57 @@
+package org.pcg.walrus.meta.pb;
+
+import "WFieldMessage.proto";
+
+//表分层结构
+// table/partition/base/tablet
+
+//模型表: 表基本信息
+message WTable
+{
+	optional string tableName = 1; // 表名
+	optional string group = 2; // 分组
+	optional string business = 3[default = "unknown"]; // 业务
+	optional string desc = 4; //描述
+	optional int32 isValid = 5; // 有效性. 0:无效, 1:有效
+	optional string startTime = 6; //提供查询的有效起始时间
+	optional string endTime = 7; //提供查询的有效结束时间
+	optional string partitionMode = 8;  // 分区类型, A:全量, Y:按年分表, M:按月分表, D:按天分表, H:按小时分表
+	optional string partitionLogic = 9;  // 分区逻辑
+	repeated string level = 10;// runner level: online|offline, 可多选
+	optional string dateColumn = 11[default = "date"];// 日期字段，过滤时间范围用, 当分区类型是 A|Y|M 的时候必填
+}
+
+//分区表，根据partitionMode，分为：按全量、年、月、日、小时分区
+message WPartitionTable
+{
+	required string partitionKey = 1;//分区key,例如：如按月分区，201603
+	repeated WDimension dimensions = 2; //维度列表
+	repeated WMetric metrics = 3;//指标列表
+	optional int32 isValid = 4;//有效性. 0:无效, 1:有效
+}
+
+// 分区基本信息表
+message WBaseTable
+{
+	optional string baseName = 1[default = "base"];// baseName: base
+	optional string currentTablet = 2; // 当前有效tablet(数据版本)
+	optional int32 isValid = 3; // 有效性. 0:无效, 1:有效
+	optional string validDay = 4; // 有效日期数据，只有当按月分区并且行转列. 例如："1101111100000000000000000"
+	optional string startTime = 5; // 提供查询的有效起始时间
+	optional string endTime = 6; // 提供查询的有效结束时间
+}
+
+// 分区版本表
+message WTablet
+{
+	optional string path = 1; //文件存储路径
+	optional string format = 2; //文件存储类型, parquet, csv, hive, clickhouse, mysql...
+	optional int32 isValid = 3; // 有效性. 0:无效, 1:有效
+	optional string schema = 4; // 文件schema
+	optional string delim = 5; // 文件分隔符
+	optional int32 isBc = 6[default = 0]; // 是否广播（针对维度表的map join）. 0:否, 1:是, 2: lazy_bc, 计算时bc, 对于比较数据量比较小的表最好设置成1， 计算时可以广播到各个executor
+	optional string bcLogic = 7; // broadcast logic, sql...设置需要广播的字段和条件： SELECT col_1,col_2 FROM {TABLE} where date BETWEEN {BDAY} AND {EDAY} and xxx
+	optional uint64 recordNum = 8; // hdfs文件大小
+	optional uint64 fileNum = 9[default = 0]; // hdfs文件数
+	optional string createTimestamp = 10; // 生成时间
+}

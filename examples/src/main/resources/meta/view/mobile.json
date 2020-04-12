@@ -1,0 +1,25 @@
+{
+  "name":"mobile",
+  "business":"mobile",
+  "unionMode":"supplement",
+  "desc":"移动端流量pv点击视图",
+  "joins":[
+    {
+      "dictName":"dict_location",  "dictKeys":["location_id"],  "factKeys":["location_id"],
+      "childDict": [
+        {"dictName":"dict_site",  "dictKeys":["site"],  "factKeys":["site"]}
+      ]
+    },
+    {
+      "dictName":"dict_area",  "dictKeys":["area"],  "factKeys":["area"]
+    }
+  ],
+  "unions":[
+    {
+      "name":"daily_mobile_view"
+    },
+    {
+      "name":"daily_mobile_click"
+    }
+  ]
+}

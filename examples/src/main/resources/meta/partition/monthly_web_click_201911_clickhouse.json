@@ -1,0 +1,31 @@
+{
+  "tableType":"table",
+  "tableName":"monthly_web_click",
+  "partitionKey":"201911",
+  "startTime":"2019-11-01 00:00:00",
+  "endTime":"2019-11-30 23:59:59",
+  "dimensions": [
+    {
+      "name":"date",
+      "type":"int",
+      "group":"时间",
+      "chinese":"日期"
+    },
+    {
+      "name":"location_name",
+      "type":"string",
+      "group":"资源",
+      "chinese":"广告位"
+    }
+  ],
+  "metrics": [
+    {
+      "name":"click",
+      "type":"long",
+      "group":"指标",
+      "chinese":"点击"
+    }
+  ],
+  "path": "{\"url\": \"jdbc:clickhouse://host:port/db\", \"table\": \"$table\", \"user\": \"$user\", \"password\": \"$pwd\"}",
+  "format": "clickhouse"
+}

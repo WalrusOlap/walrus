@@ -1,0 +1,37 @@
+{
+  "tableType":"table",
+  "tableName":"yearly_web_income",
+  "partitionKey":"2019",
+  "startTime":"2019-01-01 00:00:00",
+  "endTime":"2019-12-31 00:59:59",
+  "dimensions": [
+    {
+      "name":"date",
+      "type":"int",
+      "group":"时间",
+      "chinese":"日期"
+    },
+    {
+      "name":"year",
+      "type":"int",
+      "group":"时间",
+      "chinese":"年",
+      "derivedMode":"extend",
+      "derivedLogic":{
+        "params":[
+          "year(date)"
+        ]
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "name":"income",
+      "type":"double",
+      "group":"指标",
+      "chinese":"收入"
+    }
+  ],
+  "path": "{\"url\": \"jdbc:mysql://host:port/db\", \"table\": \"$table\", \"user\": \"$user\", \"password\": \"$pwd\"}",
+  "format": "db"
+}

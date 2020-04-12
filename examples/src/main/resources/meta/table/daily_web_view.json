@@ -1,0 +1,9 @@
+{
+  "tableName":"daily_web_view",
+  "group":"web",
+  "desc":"web view daily model",
+  "startTime":"2018-01-01 00:00:00",
+  "endTime":"2019-11-30 23:59:59",
+  "partitionMode":"D",
+  "levels":"offline"
+}

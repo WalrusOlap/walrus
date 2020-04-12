@@ -1,0 +1,70 @@
+{
+  "name":"mobile_web",
+  "business":"all",
+  "unionMode":"supplement",
+  "desc":"网站全景视图",
+  "joins":[
+    {
+      "dictName":"dict_location",  "dictKeys":["location_id"],  "factKeys":["location_id"],
+      "childDict": [
+        {"dictName":"dict_site",  "dictKeys":["site"],  "factKeys":["site"]}
+      ]
+    }
+  ],
+  "unions": [
+    {
+      "name": "income",
+      "unionMode": "simple",
+      "unions": [
+        {
+          "name":"yearly_web_income"
+        }
+      ]
+    },
+    {
+      "name": "view_click",
+      "unionMode": "simple",
+      "unions": [
+        {
+          "name":"web_pv_click",
+          "unionMode":"supplement",
+          "joins": [
+            {"dictName":"dict_area",  "dictKeys":["area"],  "factKeys":["area"]},
+            {"dictName":"dict_order",  "dictKeys":["oid"],  "factKeys":["oid"]}
+          ],
+          "unions":[
+            {
+              "name":"hourly_web_view",
+              "unionMode":"simple",
+              "cubes":[
+                {"name":"daily_web_view","priority":1},
+                {"name":"monthly_web_view","priority":2}
+              ]
+            },
+            {
+              "name":"hourly_web_click",
+              "unionMode":"simple",
+              "cubes":[
+                {"name":"daily_web_click","priority":1},
+                {"name":"monthly_web_click","priority":2}
+              ]
+            }
+          ]
+        },
+        {
+          "name":"mobile_pv_click",
+          "business":"mobile",
+          "unionMode":"supplement",
+          "unions":[
+            {
+              "name":"daily_mobile_view"
+            },
+            {
+              "name":"daily_mobile_click"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

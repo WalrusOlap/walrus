@@ -1,0 +1,14 @@
+{
+  "author": "walrus",
+  "saveMode": "hdfs",
+  "savePath": "$path",
+  "logic": {
+    "table": "mobile_web",
+    "metric": "imp,click",
+    "where": "location_id='loc_1'",
+    "group_by": "location_id,client",
+    "end_day": "20191101",
+    "begin_day": "20191101"
+  },
+  "parameter": "--conf spark.driver.extraJavaOptions=-Dwalrus.optimizer.skew.join=true"
+}

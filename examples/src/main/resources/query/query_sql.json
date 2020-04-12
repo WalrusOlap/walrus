@@ -1,0 +1,7 @@
+{
+  "author": "walrus",
+  "saveMode": "hdfs",
+  "savePath": "$path",
+  "format": "sql",
+  "logic": "select location_id,COUNT(distinct omgid) uv,sum(click)/sum(imp) ctr, sum(click) from web where location_id='lco_1' and date_column between 20191101 and 20191101 group by location_id"
+}

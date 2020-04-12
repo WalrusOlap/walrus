@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.pcg.walrus</groupId>
+		<artifactId>walrus-parent</artifactId>
+		<version>1.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	
+	<artifactId>walrus-common</artifactId>
+	<packaging>jar</packaging>
+
+	<name>walrus-common</name>
+
+	<dependencies>
+		<!-- xml -->
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+		<!-- zk -->
+		<dependency>
+		    <groupId>org.apache.curator</groupId>
+		    <artifactId>curator-framework</artifactId>
+			<version>2.6.0</version>
+			<exclusions>
+		        <exclusion>
+		            <groupId>org.apache.zookeeper</groupId>
+		            <artifactId>zookeeper</artifactId>
+		        </exclusion>
+	    	</exclusions>
+		</dependency>
+
+		<!-- sql -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.1.13</version>
+		</dependency>
+        <!-- clickhouse -->
+        <dependency>
+            <groupId>ru.yandex.clickhouse</groupId>
+            <artifactId>clickhouse-jdbc</artifactId>
+            <version>${ch.jdbc.version}</version>
+        </dependency>
+        <!-- kylin-jdbc -->
+        <dependency>
+            <groupId>org.apache.kylin</groupId>
+            <artifactId>kylin-jdbc</artifactId>
+            <version>${kylin.jdbc.version}</version>
+        </dependency>
+
+    </dependencies>
+</project>

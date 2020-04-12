@@ -1,0 +1,27 @@
+package org.pcg.walrus.meta.pb;
+
+// 任务
+message WJob
+{
+  optional int32 id = 1;
+  optional string author = 2;// 任务提交人
+  optional int32 status = 3; // SUBMIT = 0, WAITING = 1, RUNNING = 2, SUCCESSED = 3, FAILED = 4, TOKILL=5, KILLING = 6, KILLED = 7
+  optional string level = 4; // online|offline
+  optional string format = 5[default = "json"]; // 任务脚本 json|sql
+  optional string desc = 6; // 任务信息
+  optional string logic = 7; // 逻辑脚本
+  optional string table = 8; // 查询表
+  optional string bday = 9; // 查询开始日期
+  optional string eday = 10; // 查询结束日期
+  optional int32 errorCode = 11[default = 0]; // 错误码
+  optional string message = 12;  // 任务信息
+  optional string saveMode = 13[default = "hdfs"]; // 结果保存模式: hdfs|mysql...
+  optional string saveFormat = 14[default = "csv"]; // 结果保存格式: csv,parquet....
+  optional string savePath = 15; // 结果保存信息: hdfs路径|DB信息
+  optional int64 resultLines = 16;    // 结果行数
+  optional string submitType = 17[default = "local"];       // 任务提交方式：local： 本地脚本， thrift： thrift server
+  optional string jobPlan = 18[default = ""];  // 任务执行计划
+  optional string resource = 19; // spark任务资源: --num-executors 10 --driver-memory 2g --executor-memory 2g  --executor-cores 1
+  optional string parameter = 20; // spark参数: --conf spark.shuffle.service.enabled=true
+  optional string ext = 21;
+}

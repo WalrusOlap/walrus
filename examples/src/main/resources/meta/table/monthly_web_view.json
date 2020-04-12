@@ -1,0 +1,9 @@
+{
+  "tableName":"monthly_web_view",
+  "group":"web",
+  "desc":"web view monthly model",
+  "startTime":"2019-01-01 00:00:00",
+  "endTime":"2019-11-30 23:59:59",
+  "partitionMode":"M",
+  "levels":"offline,online"
+}

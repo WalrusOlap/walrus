@@ -1,0 +1,9 @@
+{
+  "tableName":"yearly_web_income",
+  "group":"web",
+  "desc":"yearly web income model",
+  "startTime":"2018-01-01 00:00:00",
+  "endTime":"2019-05-31 23:59:59",
+  "partitionMode":"Y",
+  "levels":"offline,offline"
+}

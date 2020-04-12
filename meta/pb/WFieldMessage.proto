@@ -1,0 +1,44 @@
+package org.pcg.walrus.meta.pb;
+
+// 自定义UDF
+message WUdf
+{
+	optional string className = 1[default = "DEFAULT_CLASS"];// 类名
+	optional string methodName = 2[default = "DEFAULT_METHOD"];// 方法名
+	repeated string params = 3;// 参数
+}
+
+// 维度表
+message WDict
+{
+	optional string dictName = 1;//维度表名
+	optional string joinType = 2[default = "left"];// join方式: left, right, inner, full outer
+	repeated string factKeys = 3;//事实表join的key
+	repeated string dictKeys = 4;//维度表join的key
+	repeated WDict childDict = 5; // 下级join维度表(雪花模型)
+}
+
+// 维度
+message WDimension
+{
+	optional string name = 1;//column名称
+	optional string type = 2;//column类型
+	optional string group = 3;//column分组
+	optional string chinese = 4;//column中文
+	optional string derivedMode = 5[default = "select"]; // 派生来源类型：select(直接select), join(通过join), derived(派生), virtual(虚拟字段)
+	optional WDict dict = 6; // join配置表
+	optional WUdf derivedLogic = 7; // 派生字段逻辑
+}
+
+// 指标
+message WMetric
+{
+	optional string name = 1;//column名称
+	optional string type = 2;//column类型
+	optional string group = 3;//column分组
+	optional string chinese = 4;//column中文
+	optional string derivedMode = 5[default = "select"]; //派生来源类型：select(直接select), join(通过join), derived(派生), virtual(虚拟字段)
+	optional string method = 6[default = "SUM"]; // group by method: SUM,COUNT,COUNT_DISTINCT...
+	optional WDict dict = 7; // join配置表
+	optional WUdf derivedLogic = 8; // 派生字段逻辑
+}

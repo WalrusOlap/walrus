@@ -1,0 +1,9 @@
+{
+  "tableName":"dict_location",
+  "group":"dict",
+  "desc":"广告位维度表",
+  "startTime":"2018-01-01 00:00:00",
+  "endTime":"2050-12-31 23:59:59",
+  "partitionMode":"A",
+  "levels":"offline,online"
+}

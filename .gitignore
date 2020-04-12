@@ -1,0 +1,31 @@
+### Java template
+*.class
+target/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+### intellj
+*.iml
+**/.idea
+
+### eclipse
+.settings
+.cache-main
+.scala_dependencies
+.worksheet
+.classpath
+.project
+
+# Created by .ignore support plugin (hsz.mobi)
+.DS_Store
+
+# mvn 
+dependency-reduced-pom.xml
+
+# test
+TServer.java
+test.py
+partition_test/

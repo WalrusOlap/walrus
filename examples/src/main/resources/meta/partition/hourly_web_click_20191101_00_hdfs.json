@@ -1,0 +1,57 @@
+{
+  "tableType":"table",
+  "tableName":"hourly_web_click",
+  "partitionKey":"20191101_00",
+  "startTime":"2019-11-01 00:00:00",
+  "endTime":"2019-11-01 00:59:59",
+  "dimensions": [
+    {
+      "name":"timestamp",
+      "type":"long",
+      "group":"时间",
+      "chinese":"时间戳"
+    },
+    {
+      "name":"oid",
+      "type":"int",
+      "group":"订单",
+      "chinese":"订单号"
+    },
+    {
+      "name":"omgid",
+      "type":"string",
+      "group":"用户",
+      "chinese":"用户标识"
+    },
+    {
+      "name":"date",
+      "type":"int",
+      "group":"时间",
+      "chinese":"日期",
+      "derivedMode":"extend",
+      "derivedLogic":{
+        "className":"org.pcg.walrus.common.udf.TimeUdf",
+        "methodName":"getDay",
+        "params":[
+          "timestamp"
+        ]
+      }
+    },
+    {
+      "name":"location_id",
+      "type":"long",
+      "group":"资源",
+      "chinese":"广告位ID"
+    }
+  ],
+  "metrics": [
+    {
+      "name":"click",
+      "type":"long",
+      "group":"指标",
+      "chinese":"click"
+    }
+  ],
+  "path": "$path",
+  "format":"parquet"
+}

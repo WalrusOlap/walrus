@@ -1,0 +1,35 @@
+{
+  "tableType":"dict",
+  "tableName":"dict_location",
+  "partitionKey":"A",
+  "startTime":"2019-01-01 00:00:00",
+  "endTime":"2020-12-31 00:59:59",
+  "dimensions": [
+    {
+      "group":"资源属性",
+      "name":"location_id",
+      "chinese":"广告位ID",
+      "type":"string"
+    },
+    {
+      "group":"资源属性",
+      "name":"location_name",
+      "isOpen":"true",
+      "isFilter":"true",
+      "chinese":"广告位名称",
+      "type":"string"
+    },
+    {
+      "group":"资源属性",
+      "name":"site",
+      "isOpen":"true",
+      "isFilter":"true",
+      "chinese":"资源站点",
+      "type":"string"
+    }
+  ],
+  "metrics": [],
+  "path": "$path",
+  "format":"csv",
+  "isBc": "1"
+}

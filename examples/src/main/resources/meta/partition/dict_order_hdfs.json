@@ -1,0 +1,24 @@
+{
+  "tableType":"dict",
+  "tableName":"dict_order",
+  "partitionKey":"A",
+  "startTime":"2019-01-01 00:00:00",
+  "endTime":"2020-12-31 00:59:59",
+  "dimensions": [
+    {
+      "name":"oid",
+      "type":"long",
+      "group":"订单",
+      "chinese":"订单号"
+    },
+    {
+      "name":"client",
+      "type":"string",
+      "group":"订单",
+      "chinese":"客户"
+    }
+  ],
+  "metrics": [],
+  "path": "$path",
+  "format":"csv"
+}
